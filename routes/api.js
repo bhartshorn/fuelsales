@@ -3,10 +3,18 @@ const { Pool } = require('pg');
 const path = require('path');
 
 var router = express.Router();
-const pool = new Pool({
-	connectionString: process.env.DATABASE_URL,
-	ssl: true,
-});
+
+// Dirty hack so it will connect on Heroku and Home
+var pool = null;
+if (process.env.DATABASE_URL) {
+	pool = new Pool({
+		connectionString: process.env.DATABASE_URL,
+		ssl: true,
+	});
+} else {
+	pool = new Pool()
+}
+
 
 router.get('/v1/transactions', (req, res, next) => {
 	const results = [];
@@ -30,7 +38,8 @@ router.get('/v1/transactions', (req, res, next) => {
 		console.log(toDate);
 	}
 
-	const query = pool.query('SELECT * FROM transactions\
+	const query = pool.query('SELECT * FROM transactions t JOIN gasboy_errors e\
+		ON t.error_id = e.id\
 		WHERE trans_date >= $1 AND trans_date < $2\
 		ORDER BY trans_date, trans_num',
 		[fromDate, toDate],                  
