@@ -3,10 +3,13 @@ const { Pool } = require('pg');
 const path = require('path');
 
 var router = express.Router();
+const pool = new Pool({
+	connectionString: process.env.DATABASE_URL,
+	ssl: true,
+});
 
 router.get('/v1/transactions', (req, res, next) => {
 	const results = [];
-	const pool = new Pool();
 
 	var today = new Date();
 	var fromDate = new Date(2000, 1, 1);
