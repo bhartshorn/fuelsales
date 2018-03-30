@@ -7,12 +7,17 @@
   
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" charset="utf8" src="/javascripts/date.format.js"></script>
 	<script type="text/javascript" charset="utf8" src="/javascripts/fuelsales.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-	<table id="transactions" class="display compact cell-border">
+	<form id="filter" style="display: inline;">
+		<label>start date: </label><input name="from" type="date" />
+		<label>end date: </label><input name="to" type="date" />
+	</form>
+	<a href="logout">log out</a>
+	<table id="transactions" class="display compact cell-border" data-scroll-y='70vh' data-state-save='true' data-paging='false'>
 		<thead>
 			<tr>
 				<th>Trans ID</th>
