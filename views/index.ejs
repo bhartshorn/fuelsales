@@ -7,8 +7,7 @@
   
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" charset="utf8" src="/javascripts/date.format.js"></script>
-	<script type="text/javascript" charset="utf8" src="/javascripts/fuelsales.js"></script>
+	<script type="text/javascript" charset="utf8" src="/javascripts/code.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
@@ -17,16 +16,16 @@
 		<label>end date: </label><input name="to" type="date" />
 	</form>
 	<a href="logout">log out</a>
+	<a href="#" id="download">download current transactions</a>
 	<table id="transactions" class="display compact cell-border" data-scroll-y='70vh' data-state-save='true' data-paging='false'>
 		<thead>
 			<tr>
-				<th>Trans ID</th>
 				<th>Trans Date</th>
-				<th>Prod #</th>
-				<th>Price</th>
-				<th>Total</th>
-				<th>Error</th>
+				<th>Trans ID</th>
 				<th>Card #</th>
+				<th>Prod #</th>
+				<th>Quantity</th>
+				<th>Error</th>
 			</tr>
 		</thead>
 	</table>
