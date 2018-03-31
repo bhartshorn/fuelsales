@@ -36,6 +36,7 @@ function createGaslog(transactions, callback) {
 }
 function formatDec(num, precision) {
 	var cents = String(num)
+	//TODO: check if number is big enough, add leading zero if not!
 	return cents.slice(0, -precision) + '.' + cents.slice(-precision);
 }
 
