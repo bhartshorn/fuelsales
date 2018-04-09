@@ -6,58 +6,22 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
-var bcrypt = require('bcrypt')
 
+// Authentication
 var LocalStrategy = require('passport-local').Strategy;
 var dbauth = require('./models/dbauth.js');
 
+passport.serializeUser(dbauth.serialize);
+passport.deserializeUser(dbauth.serialize); 
+passport.use(new LocalStrategy(dbauth.checkLogin));
+
+// Routes
 var index = require('./routes/index');
 var api = require('./routes/api');
 var login = require('./routes/login');
-var logout = require('./routes/logout');
+var logout = require('./routes/logout'); 
 
 var app = express();
-
-// passport authentication setup
-const saltRounds = 10
-const myPlaintextPassword = 'password'
-const salt = bcrypt.genSaltSync(saltRounds)
-const passwordHash = bcrypt.hashSync(myPlaintextPassword, salt)
-
-function findUser (username, callback) {
-  if (username === user.username) {
-    return callback(null, user)
-  }
-  return callback(null)
-}
-
-passport.serializeUser(function (username, done) {
-  done(null, username)
-})
-
-passport.deserializeUser(function (username, done) {
-	done(null, username);
-})
-
-passport.use(new LocalStrategy(dbauth));
-
-function jsonMiddleware () {
-  return function (req, res, next) {
-    if (req.isAuthenticated()) {
-      return next()
-    }
-    res.status(401).json({error: 'Not Authenticated'});
-  }
-}
-
-function htmlMiddleware () {
-  return function (req, res, next) {
-    if (req.isAuthenticated()) {
-      return next()
-    }
-    res.redirect('/login')
-  }
-}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -78,10 +42,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api', jsonMiddleware(), api);
+app.use('/api', dbauth.jsonMiddleware(), api);
 app.use('/login', login);
 app.use('/logout', logout);
-app.use('/', htmlMiddleware(), index);
+app.use('/', dbauth.htmlMiddleware(), index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

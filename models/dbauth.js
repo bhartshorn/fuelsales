@@ -20,4 +20,26 @@ function checkLogin (username, password, done) {
 	});
 }
 
-module.exports = checkLogin;
+function jsonMiddleware () {
+  return function (req, res, next) {
+    if (req.isAuthenticated()) {
+      return next()
+    }
+    return res.status(401).json({error: 'Not Authenticated'});
+  }
+}
+
+function htmlMiddleware () {
+  return function (req, res, next) {
+    if (req.isAuthenticated()) {
+      return next()
+    }
+    return res.redirect('/login')
+  }
+}
+
+function serialize (username, done) {
+	return done(null, username);
+}
+
+module.exports = {checkLogin, jsonMiddleware, htmlMiddleware, serialize};
