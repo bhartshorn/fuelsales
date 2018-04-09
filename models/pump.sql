@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS transactions;
-DROP TABLE IF EXISTS polls;
-DROP TABLE IF EXISTS gasboy_errors;
+DROP TABLE IF EXISTS transactions, polls, gasboy_errors, users;
+
+CREATE EXTENSION pgcrypto;
 
 CREATE TABLE gasboy_errors (
 	id smallserial PRIMARY KEY
@@ -34,6 +34,19 @@ CREATE TABLE transactions (
 		FOREIGN KEY (error_id) REFERENCES gasboy_errors (id)
 		ON DELETE CASCADE
 		ON UPDATE RESTRICT
+);
+
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY
+	, username TEXT NOT NULL UNIQUE
+	, email TEXT NOT NULL
+	, password TEXT NOT NULL
+);
+
+INSERT INTO users (username, email, password) VALUES (
+	'dbtest'
+	, 'dbtest@fuelsales.com'
+	, crypt('dbpassword', gen_salt('bf'))
 );
 
 INSERT INTO gasboy_errors (id, error_text) VALUES
