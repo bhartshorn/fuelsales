@@ -1,9 +1,28 @@
-<form action="/login" method="post">
-	<table>
-		<tr><td><label>Username:</label></td>
-		<td><input type="text" name="username"/></td></tr>
-		<tr><td><label>Password:</label></td>
-		<td><input type="password" name="password"/></td></tr>
-	</table>
-	<input type="submit" value="Log In"/>
-</form>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Log In</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+	</head>
+	<body class="w3-container">
+		<div class="w3-card-4" id="loginbox" style="">
+			<div class="w3-container w3-indigo">
+				<h2>Log In</h2>
+			</div>
+			<div class="w3-container w3-border">
+				<form class=w3-container" action="/login" method="post">
+					<p>
+					<label>Username:</label><input class="w3-input w3-border" type="text" name="username"/>
+					</p>
+					<p>
+					<label>Password:</label><input class="w3-input w3-border" type="password" name="password"/>
+					</p>
+					<p>
+					<input class="w3-input w3-button w3-indigo" type="submit" value="Log In"/>
+					</p>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

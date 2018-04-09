@@ -11,3 +11,8 @@ div#buttons {
 	margin: 12px 0;
 	float: right;
 }
+
+div#loginbox {
+	max-width: 300px;
+	margin: 100px auto;
+}
