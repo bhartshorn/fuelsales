@@ -227,6 +227,7 @@ function createGaslog(transactions, callback) {
 }
 function formatDec(num, precision) {
 	var cents = String(num)
+	//TODO: check if number is big enough, add leading zero if not!
 	return cents.slice(0, -precision) + '.' + cents.slice(-precision);
 }
 
@@ -251,6 +252,7 @@ function createDisplayDate(dateString) {
 
 $(document).ready( () => {
 	table = $('#transactions').DataTable( {
+		dom: 'lrtip',
 		ajax: {
 			url: "/api/v1/transactions?",
 			dataSrc: ''
@@ -290,6 +292,10 @@ $(document).ready( () => {
 	});
 
 	$("#filter").change(getTransactions);
+	$("#search").on( 'keyup', function () {
+		console.log('Searching for: ', this.value);
+		table.search( this.value ).draw();
+	});
 	$("#download").click(() => {
 		transactions = table.ajax.json();
 		createGaslog(transactions, downloadGaslog)

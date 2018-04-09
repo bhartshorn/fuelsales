@@ -2,21 +2,29 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel='stylesheet' href='/stylesheets/style.css' />
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
   
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" charset="utf8" src="/javascripts/code.js"></script>
   </head>
-  <body>
-    <h1><%= title %></h1>
-	<form id="filter" style="display: inline;">
-		<label>start date: </label><input name="from" type="date" />
-		<label>end date: </label><input name="to" type="date" />
-	</form>
-	<button id="download" value="download current transactions">download current transactions</button>
-	<a href="logout">log out</a>
+  <body class="w3-container">
+    <h1 class="w3-container w3-indigo w3-center"><%= title %></h1>
+	<div id="filters">
+		<form id="filter" class="inline">
+			<label>Start Date: </label><input name="from" type="date" />
+			<label>End Date: </label><input name="to" type="date" />
+		</form>
+		<label>Search: </label><input name="search" id="search" type="text" size="10"></input>
+	</div>
+	<div id="buttons">
+		<button class="w3-button w3-yellow w3-round-large" id="download" value="download">Download</button>
+		<form method="get" action="logout" class="inline">
+			<button class="w3-button w3-red w3-round-large" type="submit">Log Out</button>
+		</form>
+	</div>
 	<table id="transactions" class="display compact cell-border" data-scroll-y='70vh' data-state-save='true' data-paging='false'>
 		<thead>
 			<tr>

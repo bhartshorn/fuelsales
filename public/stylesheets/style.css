@@ -1,12 +1,13 @@
-body {
-  padding: 10px 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.inline {
+	display: inline;
 }
 
-h1 {
-	margin: 3px 0px;
+div#filters {
+	margin: 15px 0;
+	float: left;
 }
 
-a {
-  color: #00B7FF;
+div#buttons {
+	margin: 12px 0;
+	float: right;
 }
