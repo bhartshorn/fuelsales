@@ -293,7 +293,7 @@ $(document).ready( () => {
 
 	$("#filter").change(getTransactions);
 	$("#search").on( 'keyup', function () {
-		console.log('Searching for: ', this.value);
+		//console.log('Searching for: ', this.value);
 		table.search( this.value ).draw();
 	});
 	$("#download").click(() => {
