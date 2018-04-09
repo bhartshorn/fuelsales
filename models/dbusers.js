@@ -1,6 +1,15 @@
 const { Pool } = require('pg');
 
-const pool = new Pool();
+// Dirty hack so it will connect on Heroku and Home
+var pool = null;
+if (process.env.DATABASE_URL) {
+	pool = new Pool({
+		connectionString: process.env.DATABASE_URL,
+		ssl: true,
+	});
+} else {
+	pool = new Pool()
+}
 
 function checkUser(identifier, callback) {
 	//console.log(identifier);

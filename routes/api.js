@@ -15,7 +15,6 @@ if (process.env.DATABASE_URL) {
 	pool = new Pool()
 }
 
-
 router.get('/v1/transactions', (req, res, next) => {
 	const results = [];
 
