@@ -12,12 +12,12 @@ if (process.env.DATABASE_URL) {
 }
 
 function checkUser(identifier, callback) {
-	//console.log(identifier);
+	console.log(identifier);
 	pool.query('SELECT id, username FROM users\
 		WHERE username = $1 OR email = $1', [identifier],
 		(err, results) => {
 			if (err) return callback(err, null);
-			//console.log(JSON.stringify(results));
+			console.log(JSON.stringify(results));
 			if (results.rowCount > 0) return callback(null, results.rows[0].username);
 			return callback(null, null);
 		}

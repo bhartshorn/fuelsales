@@ -2,6 +2,12 @@
 	display: inline;
 }
 
+div#userinfo {
+	display: flex;
+	align-items: center;
+	float: right;
+}
+
 div#filters {
 	margin: 15px 0;
 	float: left;
